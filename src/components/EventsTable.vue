@@ -34,7 +34,7 @@ export default {
       columns: [
         // label is the column name, field is the json key in the row data.
         {
-          label: 'SOE TIME',
+          label: 'TIME',
           field: 'systime'
         },
         {
@@ -79,7 +79,7 @@ export default {
       this.$data.stationName = this.sParams[0].value
       this.$data.startDate = this.sParams[1].value
       this.$data.endDate = this.sParams[2].value
-      this.$data.textFilter = this.sParams[3].value      
+      this.$data.textFilter = this.sParams[3].value
     }
   }
 }

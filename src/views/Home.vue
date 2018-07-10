@@ -1,5 +1,8 @@
 <template>
   <div class="home">
-    <h1 class="is-size-4">Main Page</h1>
+    <div class="container is-fluid">
+      <h1 class="is-size-3">Main Page</h1>
+      <p>Playing around with Vue. Lets do an event viewer</p>
+    </div>
   </div>
 </template>
