@@ -20,6 +20,7 @@
     "bulma": "^0.7.1",
     "vue-flatpickr-component": "^7.0.4",
     "vue-good-table": "^2.8.2",
+    "vue-multiselect": "^2.1.0",
     "vue-template-compiler": "^2.5.16"
   },
   "eslintConfig": {

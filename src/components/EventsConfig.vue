@@ -9,16 +9,31 @@
             :key="formInput.id"
             class="field"
             >
-            <label class="label">{{formInput.ilabel}}</label>
+            <label class="label has-text-grey-light">{{formInput.ilabel}}</label>
             <div class="control">
                 <!-- using v-if on the id. need to use flatpickr component for date selection -->
-                <input v-if="formInput.id < 3" v-model="formInput.value" class="input" type="text" :placeholder="formInput.iPlaceholder">
-                <flat-pickr v-else class="input" v-model="formInput.value" :config="fpconfig"></flat-pickr>
+                <multiselect class="input has-background-grey-dark"
+                  v-if="formInput.id === 1"
+                  v-model="formInput.value"
+                  :options="stations"
+                  :multiple="true"
+                  :hide-selected="true"
+                  track-by="station_id_text"
+                  label="station_id_text">
+                  <template slot="tag" slot-scope="props">
+                    <span class="tag is-dark tag-margin">
+                      <span>{{ props.option.station_id_text }}</span>
+                      <button class="delete is small" @click="props.remove(props.option)"></button>
+                    </span>
+                  </template>
+                </multiselect>
+                <input v-else-if="formInput.id === 2" v-model="formInput.value" class="input has-text-light has-background-grey-dark" type="text" :placeholder="formInput.iPlaceholder">
+                <flat-pickr v-else class="input has-text-light has-background-grey-dark" v-model="formInput.value" :config="fpconfig"></flat-pickr>
             </div>
         </div>
         <div class="control">
             <!-- when button is clicked emit event called searchParams containing the formInputs object -->
-            <button v-on:click="$emit('searchParams', formInputs)" class="button is-primary">Submit</button>
+            <button v-on:click="$emit('searchParams', formInputs)" class="button is-success">Submit</button>
         </div>
     </div>
 </template>
@@ -27,6 +42,8 @@
 // Import flatpickr component for datetime selection
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
+// Import Multiselect component for station selection
+import Multiselect from 'vue-multiselect'
 
 export default {
   name: 'events-config', // name of this component
@@ -73,7 +90,48 @@ export default {
     }
   },
   components: {
-    flatPickr
+    flatPickr,
+    Multiselect
   }
 }
 </script>
+
+<style>
+  /* styling the multiselect */
+  .tag-margin{
+    margin-right: 5px;
+  }
+  .multiselect__tags{
+    border: 0px;
+  }
+  .multiselect__input:focus{
+    outline: none;
+    border: 0px;
+    background-color: #4a4a4a;
+    color:whitesmoke;
+  }
+  .multiselect__tags-wrap{
+    float: left;
+  }
+ .multiselect__content-wrapper{
+   z-index: 1;
+   overflow-y: scroll;
+   background-color: #4a4a4a;
+   color:whitesmoke;
+   position: absolute;
+   top:40px;
+ }
+ .multiselect__option{
+   font-size: 20px;
+ }
+ .multiselect__element{
+   cursor: pointer;
+ }
+ /* general input style */
+ .input {
+   border-color:transparent;
+ }
+ .input:hover {
+   border-color:transparent;
+ }
+</style>

@@ -1,6 +1,6 @@
 <template>
     <div id="nav">
-        <nav class="navbar" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-black" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="/">
                     <img src="../assets/brand.png" alt="Place Brand here" width="28" height="28">
@@ -34,12 +34,7 @@ export default {
 </script>
 
 <style>
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #00ccff;
 }
 </style>

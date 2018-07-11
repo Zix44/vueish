@@ -1,7 +1,7 @@
 <!-- This is the Events page view -->
 <template>
   <div class="events-view">
-    <div class="container is-fluid">
+    <div class="container is-fluid has-text-light">
       <h1 class="is-size-3">Events</h1>
       <div class="tabs">
         <ul>
@@ -10,7 +10,7 @@
             v-bind:key="tab"
             v-bind:class="{ 'is-active': currentTab === tab }"
             v-on:click="currentTab = tab"
-          ><a>{{ tab }}</a></li>
+          ><a >{{ tab }}</a></li>
         </ul>
       </div>
       <!-- dynamic component. will load if tab is clicked or if searchParams event is detected -->
