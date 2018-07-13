@@ -6,9 +6,8 @@ import store from './store'
 import VueGoodTablePlugin from 'vue-good-table'
 
 // import the styles
-import 'vue-good-table/dist/vue-good-table.css'
-// bulma for css
-import 'bulma/css/bulma.css'
+import 'vue-good-table/dist/vue-good-table.css' // vue good table
+import '../public/styles/customise.scss' // bulma with customisation
 
 Vue.use(VueGoodTablePlugin)
 Vue.config.productionTip = false

@@ -1,0 +1,19 @@
+/* This file contains customisations for bulma
+ * As per Bulma documentation, this needs to be before bulma is imported.
+ * So bulma import is done at the end of this file
+ */
+
+/* 1. Import the initial bulma variables */
+@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/functions";
+
+/* add custom things here */
+$text: $white-ter; /* dark them requires whiter text */
+$input-background-color: $grey-darker;
+$input-color: $white-ter;
+$input-border-color: transparent;
+$input-hover-border-color: transparent;
+$label-color: $grey-light;
+
+/* add the rest of bulma */
+@import 'bulma'

@@ -1,7 +1,7 @@
 <!-- This is the Events page view -->
 <template>
   <div class="events-view">
-    <div class="container is-fluid has-text-light">
+    <div class="container is-fluid">
       <h1 class="is-size-3">Events</h1>
       <div class="tabs">
         <ul>
