@@ -12,6 +12,7 @@
             :pagination-options="{
                 enabled: true
             }"
+            styleClass="vgt-table vueish-style"
         >
         <div slot="table-actions">
             <a class="button">Export</a>
@@ -84,3 +85,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.vueish-style{
+  background-color: #343434;
+}
+</style>

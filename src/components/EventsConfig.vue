@@ -76,9 +76,21 @@ export default {
     let stationDataUrl = 'http://localhost:3000/data' // URL for station data
     // now lets fetch data
     fetch(stationDataUrl)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          // fetch only fails if network error
+          // this will catch other errors and pass them to
+          // the catch function below
+          throw new Error()
+        }
+        return response.json()
+      })
       .then(function (data) {
         vm.stations = data
+      }).catch(error => {
+        console.log('Error: ' + error)
+        let errMsg = 'Failed to retrieve stations'
+        this.$el.querySelector('.multiselect__input').placeholder = errMsg
       })
   },
   mounted () {
