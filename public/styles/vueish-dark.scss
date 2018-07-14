@@ -16,5 +16,13 @@ $input-border-color: transparent;
 $input-hover-border-color: transparent;
 $label-color: $grey-light;
 
+/* Table Styling */
+$table-background-color: #343538;
+$table-color: $white-ter;
+$table-striped-row-even-background-color: #363739;
+$table-striped-row-even-hover-background-color: #454545;
+$table-head-cell-color: $grey-light;
+$table-cell-border: transparent;
+
 /* add the rest of bulma */
 @import 'bulma'

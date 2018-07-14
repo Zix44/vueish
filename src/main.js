@@ -3,13 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import VueGoodTablePlugin from 'vue-good-table'
+// Trying out a different table component
+import {ClientTable, Event} from 'vue-tables-2'
 
 // import the styles
-import 'vue-good-table/dist/vue-good-table.css' // vue good table
 import '../public/styles/vueish-dark.scss' // bulma with customisation
 
-Vue.use(VueGoodTablePlugin)
+Vue.use(ClientTable, {}, false, 'bulma')
 Vue.config.productionTip = false
 
 new Vue({

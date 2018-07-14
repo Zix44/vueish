@@ -21,8 +21,8 @@
     "node-sass": "^4.9.2",
     "sass-loader": "^7.0.3",
     "vue-flatpickr-component": "^7.0.4",
-    "vue-good-table": "^2.8.2",
     "vue-multiselect": "^2.1.0",
+    "vue-tables-2": "^1.4.63",
     "vue-template-compiler": "^2.5.16"
   },
   "eslintConfig": {

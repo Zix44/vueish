@@ -1,23 +1,7 @@
 <template>
     <div>
         <h1 class="is-size-4">Retrieved Data</h1>
-        <vue-good-table
-            :columns="columns"
-            :rows="rows"
-            :lineNumbers="true"
-            :search-options="{
-                enabled: true,
-                placeholder: 'Search this table'
-            }"
-            :pagination-options="{
-                enabled: true
-            }"
-            styleClass="vgt-table vueish-style"
-        >
-        <div slot="table-actions">
-            <a class="button is-large is-info is-outlined">Export</a>
-        </div>
-        </vue-good-table>
+        <v-client-table :data="tableData" :columns="columns" :options="options"></v-client-table>
     </div>
 </template>
 
@@ -28,60 +12,46 @@ export default {
   props: ['sParams'],
   data () {
     return {
-      stationName: 'All Stations',
-      startDate: d.setDate(d.getDate() - 1),
-      endDate: new Date(),
-      textFilter: '',
+      stationName: 'All Stations', // Default is all
+      startDate: d.setDate(d.getDate() - 1), // Default is 1 day ago
+      endDate: new Date(), // Default is now
+      textFilter: '', // Default is no filter
       columns: [
-        // label is the column name, field is the json key in the row data.
-        {
-          label: 'TIME',
-          field: 'systime'
-        },
-        {
-          label: 'TABLE',
-          field: 'oty'
-        },
-        {
-          label: 'SUBSTATION',
-          field: 'station_id_text'
-        },
-        {
-          label: 'MESSAGE',
-          field: 'text'
-        },
-        {
-          label: 'STATE TEXT',
-          field: 'new_state_text'
-        },
-        {
-          label: 'EVENT REASON',
-          field: 'reason'
-        },
-        {
-          label: 'EVENT TYPE',
-          field: 'type'
-        },
-        {
-          label: 'POINT CLASS',
-          field: 'class'
-        },
-        {
-          label: 'USER NAME',
-          field: 'user_name'
-        }
+        'systime',
+        'oty',
+        'station_id_text',
+        'text',
+        'new_state_text',
+        'reason',
+        'type',
+        'class',
+        'user_name'
       ],
-      rows: [] // we will fetch row data
+      options: {
+        filterByColumn: true,
+        headings: {
+          oty: 'TABLE',
+          new_state_text: 'STATE TEXT',
+          systime: 'TIME',
+          text: 'MESSAGE',
+          station_id_text: 'STATION',
+          user_name: 'USER NAME',
+          reason: 'EVENT REASON',
+          type: 'EVENT TYPE',
+          class: 'POINT CLASS'
+        }
+      },
+      tableData: [] // we will fetch row data
     }
   },
   created () {
     // lets make some fake rows
-    let fakeDataSize = 20
+    let fakeDataSize = 500
     let fakeData = []
     for (let i = 0; i < fakeDataSize; i++) {
       fakeData.push({
         'oty': 'EVENT_LIST' + i,
-        'new_state_text': 'State_' + i,
+        'new_state_text': 'State_' + (i * 2),
         'systime': '06/07/2018 15:16:51.989',
         'text': 'Some Event Happened with ID: ' + i,
         'station_id_text': 'STATION_' + i,
@@ -91,12 +61,9 @@ export default {
         'class': 'Event Class: ' + i
       })
     }
-    this.$data.rows = fakeData
+    this.$data.tableData = fakeData
   },
   mounted () {
-    // check that we have received new search parameters
-    this.$el.querySelector('.vgt-input').classList.add('input')
-    this.$el.querySelector('.vgt-input').classList.add('is-large')
     if (this.sParams.length > 0) {
       this.$data.stationName = this.sParams[0].value
       this.$data.startDate = this.sParams[1].value
@@ -108,24 +75,7 @@ export default {
 </script>
 
 <style>
-.vueish-style{
-  background-color: #343434 !important;
-  border: transparent !important;
-}
-.vueish-style tbody tr td{
-  color:whitesmoke !important;
-  border-bottom-color: #404040 !important;
-}
-.vgt-global-search, .vgt-wrap__footer, .vgt-table thead th, .vgt-table th.line-numbers, .vgt-table th.vgt-checkbox-col{
-  border: transparent !important;
-  background: #343538 !important;
-  color: #b5b5b5 !important;
-}
-.vgt-table thead th.sorting-asc, .vgt-table thead th.sorting-desc {
-    color: #f5f5f5 !important;
-}
-.magnifying-glass{
-  height: 26px !important;
-  width: 26px !important;
-}
+  .VueTables__sortable{
+    cursor: pointer;
+  }
 </style>
