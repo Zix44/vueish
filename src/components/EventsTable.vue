@@ -15,7 +15,7 @@
             styleClass="vgt-table vueish-style"
         >
         <div slot="table-actions">
-            <a class="button">Export</a>
+            <a class="button is-large is-info is-outlined">Export</a>
         </div>
         </vue-good-table>
     </div>
@@ -74,8 +74,29 @@ export default {
       rows: [] // we will fetch row data
     }
   },
+  created () {
+    // lets make some fake rows
+    let fakeDataSize = 20
+    let fakeData = []
+    for (let i = 0; i < fakeDataSize; i++) {
+      fakeData.push({
+        'oty': 'EVENT_LIST' + i,
+        'new_state_text': 'State_' + i,
+        'systime': '06/07/2018 15:16:51.989',
+        'text': 'Some Event Happened with ID: ' + i,
+        'station_id_text': 'STATION_' + i,
+        'user_name': 'User_' + i,
+        'reason': 'reason' + i,
+        'type': 'Event Type: ' + i,
+        'class': 'Event Class: ' + i
+      })
+    }
+    this.$data.rows = fakeData
+  },
   mounted () {
     // check that we have received new search parameters
+    this.$el.querySelector('.vgt-input').classList.add('input')
+    this.$el.querySelector('.vgt-input').classList.add('is-large')
     if (this.sParams.length > 0) {
       this.$data.stationName = this.sParams[0].value
       this.$data.startDate = this.sParams[1].value
@@ -88,6 +109,23 @@ export default {
 
 <style>
 .vueish-style{
-  background-color: #343434;
+  background-color: #343434 !important;
+  border: transparent !important;
+}
+.vueish-style tbody tr td{
+  color:whitesmoke !important;
+  border-bottom-color: #404040 !important;
+}
+.vgt-global-search, .vgt-wrap__footer, .vgt-table thead th, .vgt-table th.line-numbers, .vgt-table th.vgt-checkbox-col{
+  border: transparent !important;
+  background: #343538 !important;
+  color: #b5b5b5 !important;
+}
+.vgt-table thead th.sorting-asc, .vgt-table thead th.sorting-desc {
+    color: #f5f5f5 !important;
+}
+.magnifying-glass{
+  height: 26px !important;
+  width: 26px !important;
 }
 </style>

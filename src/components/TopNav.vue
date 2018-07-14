@@ -36,6 +36,7 @@ export default {
 </script>
 
 <style>
+/* Make the active link light blue */
 #nav a.router-link-exact-active {
   color: #00ccff;
 }
