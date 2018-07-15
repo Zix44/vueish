@@ -63,7 +63,7 @@ export default {
       when the user submits the form we send this object so they get the values
       */
       formInputs: [
-        { id: 1, ilabel: 'Station(s):', iPlaceholder: 'All Stations', value: '' },
+        { id: 1, ilabel: 'Station(s):', iPlaceholder: 'All Stations', value: {station_id_text: 'All Stations'} },
         { id: 2, ilabel: 'Additonal text filter', iPlaceholder: 'e.g. EA01Q00. use % as wildcard - e.g. 66kV%Alm', value: '' },
         { id: 3, ilabel: 'Start Date:', iPlaceholder: 'Select start date', value: d.setHours(d.getHours() - 1) },
         { id: 4, ilabel: 'End Date: ', iPlaceholder: 'Select end date', value: new Date() }
@@ -91,6 +91,10 @@ export default {
         console.log('Error: ' + error)
         let errMsg = 'Failed to retrieve stations'
         this.$el.querySelector('.multiselect__input').placeholder = errMsg
+        vm.stations = [
+          {'station_id_text': 'FAKE STATION'},
+          {'station_id_text': 'ALSO FAKE'}
+        ]
       })
   },
   mounted () {

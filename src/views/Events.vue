@@ -31,7 +31,7 @@ export default {
   },
   data () {
     return {
-      currentTab: 'Config',
+      currentTab: 'Table',
       tabs: ['Config', 'Table'],
       currentSearch: []
     }
