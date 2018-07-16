@@ -73,7 +73,7 @@ export default {
   },
   created () {
     let vm = this // get the view model
-    let stationDataUrl = 'http://localhost:3000/data' // URL for station data
+    let stationDataUrl = 'http://localhost:3000/stations' // URL for station data
     // now lets fetch data
     fetch(stationDataUrl)
       .then(response => {
@@ -86,7 +86,7 @@ export default {
         return response.json()
       })
       .then(function (data) {
-        vm.stations = data
+        vm.stations = data.data
       }).catch(error => {
         console.log('Error: ' + error)
         let errMsg = 'Failed to retrieve stations'

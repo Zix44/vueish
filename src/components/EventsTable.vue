@@ -51,23 +51,25 @@ export default {
     }
   },
   created () {
-    // lets make some fake rows
-    let fakeDataSize = 500
-    let fakeData = []
-    for (let i = 0; i < fakeDataSize; i++) {
-      fakeData.push({
-        'oty': 'EVENT_LIST' + i,
-        'new_state_text': 'State_' + (i * 2),
-        'systime': '06/07/2018 15:16:51.989',
-        'text': 'Some Event Happened with ID: ' + i,
-        'station_id_text': 'STATION_' + i,
-        'user_name': 'User_' + i,
-        'reason': 'reason' + i,
-        'type': 'Event Type: ' + i,
-        'class': 'Event Class: ' + i
+    // get some fake data
+    let vm = this // get the view model
+    let eventDataUrl = 'http://localhost:3000/evt_data' // URL for event data
+    // now lets fetch data
+    fetch(eventDataUrl)
+      .then(response => {
+        if (!response.ok) {
+          // fetch only fails if network error
+          // this will catch other errors and pass them to
+          // the catch function below
+          throw new Error()
+        }
+        return response.json()
       })
-    }
-    this.$data.tableData = fakeData
+      .then(function (data) {
+        vm.tableData = data.data
+      }).catch(error => {
+        console.log('Error: ' + error)
+      })
   },
   mounted () {
     if (this.sParams.length > 0) {
