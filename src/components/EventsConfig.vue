@@ -33,7 +33,8 @@
         </div>
         <div class="control">
             <!-- when button is clicked emit event called searchParams containing the formInputs object -->
-            <button v-on:click="$emit('searchParams', formInputs)" class="button is-success is-large">Submit</button>
+            <!-- updating this to use store. when clicked call a method to save params to store -->
+            <button v-on:click="saveSearch" class="button is-success is-large">Submit</button>
         </div>
     </div>
 </template>
@@ -48,7 +49,6 @@ import Multiselect from 'vue-multiselect'
 
 export default {
   name: 'events-config', // name of this component
-  props: ['sParams'], // receive parameters from parent
   data () {
     let d = new Date()
     return {
@@ -98,12 +98,26 @@ export default {
       })
   },
   mounted () {
-    // check if we have received any search parameters
-    // this would happen if we have previously searched for something
-    if (this.sParams.length > 0) {
-      this.sParams.forEach((e, i) => {
-        this.$data.formInputs[i].value = e.value
-      })
+    // when first mounted we want to get search parameters from the store
+    let sParams = this.$store.state.searchParameters
+    this.$data.formInputs[0].value = sParams.stationList
+    this.$data.formInputs[1].value = sParams.searchFilter
+    this.$data.formInputs[2].value = sParams.seachStart
+    this.$data.formInputs[3].value = sParams.searchEnd
+  },
+  methods: {
+    saveSearch: function () {
+      // get the current search values
+      let searchParameters = {
+        stationList: this.$data.formInputs[0].value,
+        searchFilter: this.$data.formInputs[1].value,
+        seachStart: this.$data.formInputs[2].value,
+        searchEnd: this.$data.formInputs[3].value
+      }
+      // update the store
+      this.$store.commit('updateSearch', searchParameters)
+      // emit event to parent causing navigation to table
+      this.$emit('runSearch')
     }
   },
   components: {

@@ -13,9 +13,8 @@
           ><a >{{ tab }}</a></li>
         </ul>
       </div>
-      <!-- dynamic component. will load if tab is clicked or if searchParams event is detected -->
-      <!-- also passes currentSearch object to components -->
-      <component v-bind:is="currentTabComponent" v-on:searchParams="showTable" :sParams="currentSearch"></component>
+      <!-- dynamic component. will load if tab is clicked or if runSearch event is detected -->
+      <component v-bind:is="currentTabComponent" v-on:runSearch="showTable"></component>
     </div>
   </div>
 </template>
@@ -32,8 +31,7 @@ export default {
   data () {
     return {
       currentTab: 'Table',
-      tabs: ['Config', 'Table'],
-      currentSearch: []
+      tabs: ['Config', 'Table']
     }
   },
   computed: {
@@ -42,8 +40,7 @@ export default {
     }
   },
   methods: {
-    showTable: function (sp) {
-      this.currentSearch = sp
+    showTable: function () {
       this.currentTab = 'Table'
     }
   }

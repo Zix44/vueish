@@ -12,7 +12,6 @@ Currently using props and emit but maybe should transistion to vuex -->
 let d = new Date() // get current date
 export default {
   name: 'events-table',
-  props: ['sParams'],
   data () {
     return {
       stationNames: [{station_id_text: 'All Stations'}], // Default is all.
@@ -72,12 +71,12 @@ export default {
       })
   },
   mounted () {
-    if (this.sParams.length > 0) {
-      this.$data.stationNames = this.sParams[0].value
-      this.$data.textFilter = this.sParams[1].value
-      this.$data.startDate = this.sParams[2].value
-      this.$data.endDate = this.sParams[3].value
-    }
+    // when first mounted we want to get search parameters from the store
+    let sParams = this.$store.state.searchParameters
+    this.$data.stationNames = sParams.stationList
+    this.$data.textFilter = sParams.searchFilter
+    this.$data.startDate = sParams.seachStart
+    this.$data.endDate = sParams.searchEnd
     /* Lets try hijack the global search div since we aren't using it */
     let stationList = ' | '
     this.$data.stationNames.forEach((e, i) => {
